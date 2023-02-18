@@ -1,0 +1,5 @@
+# rust build artifacts
+/target/
+
+# mdbook
+/docs/book/

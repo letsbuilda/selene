@@ -1,0 +1,10 @@
+[book]
+title = "Selene"
+authors = []
+description = "Documentation for the Selene shell."
+src = "src"
+language = "en"
+
+[output.html]
+git-repository-url = "https://github.com/letsbuilda/selene"
+git-repository-icon = "fa-github"
