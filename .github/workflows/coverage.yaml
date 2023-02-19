@@ -26,11 +26,6 @@ jobs:
             ~/.cargo/git/db/
           key: cargo-${{ hashFiles('Cargo.lock') }}
 
-      - name: "Setup mold"
-        uses: rui314/setup-mold@v1
-        with:
-          make-default: true
-
       - name: "Install grcov"
         if: steps.cache.outputs.cache-hit != 'true'
         run: cargo install grcov
