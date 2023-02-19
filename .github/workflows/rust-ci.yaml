@@ -17,7 +17,8 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      CARGO_TERM_COLOR: always
+      CARGO_TERM_COLOR: "always"
+      RUSTFLAGS: "-Dwarnings"
 
     steps:
       - uses: actions/checkout@v3
@@ -31,5 +32,5 @@ jobs:
 
       - run: |
           cargo fmt --check
-          RUSTFLAGS="-Dwarnings" cargo clippy
+          cargo clippy
           cargo test
