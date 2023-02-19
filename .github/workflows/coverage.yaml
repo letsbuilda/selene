@@ -26,14 +26,6 @@ jobs:
             ~/.cargo/git/db/
           key: cargo-${{ hashFiles('Cargo.lock') }}
 
-      - name: "Install Rust"
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: nightly-2023-02-16
-          override: true
-          profile: minimal
-          components: llvm-tools-preview
-
       - name: "Setup mold"
         uses: rui314/setup-mold@v1
         with:
@@ -44,13 +36,10 @@ jobs:
         run: cargo install grcov
 
       - name: "Run tests"
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --lib --no-fail-fast
+        run: cargo test --lib --no-fail-fast
         env:
           RUSTFLAGS: "-Cinstrument-coverage"
-          LLVM_PROFILE_FILE: "cryptograms-%p-%m.profraw"
+          LLVM_PROFILE_FILE: "selene-%p-%m.profraw"
 
 
       - name: "Generate coverage data"
