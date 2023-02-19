@@ -44,15 +44,9 @@ jobs:
       - name: "Generate coverage data"
         run: |
           grcov . -s . --binary-path ./target/debug/ -t lcov --branch --ignore-not-existing --ignore "/*" -o lcov.info
-          echo "LCOV_PATH=lcov.info" >> $GITHUB_ENV
 
-      - uses: actions/upload-artifact@v3
+      - name: "Coveralls upload"
+        uses: coverallsapp/github-action@master
         with:
-          name: lcov.info
-          path: lcov.info
-
-#      - name: "Coveralls upload"
-#        uses: coverallsapp/github-action@master
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#          path-to-lcov: ${{ env.LCOV_PATH }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: lcov.info
