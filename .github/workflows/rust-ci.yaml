@@ -23,10 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # When rustup is updated, it tries to replace its binary, which on Windows is somehow locked.
-      # This can result in the CI failure, see: https://github.com/rust-lang/rustup/issues/3029
-      - run: |
-          rustup set auto-self-update disable
+      - name: "Setup mold"
+        uses: rui314/setup-mold@v1
+        with:
+          make-default: true
 
       - uses: Swatinem/rust-cache@664ce0090f15897beb496f9faf2f88e6908c80c4
 
