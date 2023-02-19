@@ -17,7 +17,7 @@ jobs:
 
       - name: "Cache Rust and project dependencies"
         id: cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/bin/
