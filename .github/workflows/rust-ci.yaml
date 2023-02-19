@@ -26,7 +26,7 @@ jobs:
       # This can result in the CI failure, see: https://github.com/rust-lang/rustup/issues/3029
       - run: |
           rustup set auto-self-update disable
-          rustup toolchain install stable
+          rustup toolchain install nightly
 
       - uses: Swatinem/rust-cache@664ce0090f15897beb496f9faf2f88e6908c80c4
 
