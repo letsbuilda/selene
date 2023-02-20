@@ -1,0 +1,47 @@
+name: "Coverage"
+
+on:
+  push:
+    paths:
+      - "tests/**"
+      - "src/**"
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  Coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v3
+
+      - name: "Cache Rust and project dependencies"
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: cargo-${{ hashFiles('Cargo.lock') }}
+
+      - name: "Install grcov"
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: cargo install grcov
+
+      - name: "Run tests"
+        run: cargo test --no-fail-fast
+        env:
+          RUSTFLAGS: "-Cinstrument-coverage"
+          LLVM_PROFILE_FILE: "selene-%p-%m.profraw"
+
+      - name: "Generate coverage data"
+        run: |
+          grcov . -s . --binary-path ./target/debug/ -t lcov --branch --ignore-not-existing --ignore "/*" -o lcov.info
+
+      - name: "Coveralls upload"
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: lcov.info

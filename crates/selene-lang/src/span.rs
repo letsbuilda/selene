@@ -1,4 +1,4 @@
-use std::fmt;
+use std::{fmt, ops::Range};
 
 use miette::SourceSpan;
 
@@ -23,5 +23,11 @@ impl fmt::Debug for Span {
 impl From<Span> for SourceSpan {
     fn from(span: Span) -> Self {
         Self::new((span.start as usize).into(), (span.len() as usize).into())
+    }
+}
+
+impl From<Span> for Range<usize> {
+    fn from(span: Span) -> Self {
+        span.start as usize..span.end as usize
     }
 }

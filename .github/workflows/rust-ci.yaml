@@ -1,0 +1,31 @@
+name: Rust CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  rust-ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+
+    name: Test `cargo fmt/clippy/test` on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    env:
+      CARGO_TERM_COLOR: "always"
+      RUSTFLAGS: "-Dwarnings"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: Swatinem/rust-cache@664ce0090f15897beb496f9faf2f88e6908c80c4
+
+      - run: |
+          cargo fmt --check
+          cargo clippy
+          cargo test

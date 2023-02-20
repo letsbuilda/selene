@@ -6,8 +6,7 @@ edition = "2021"
 [dependencies]
 lasso = { version = "0.6.0", features = ["multi-threaded"] }
 miette = "5.5.0"
+num-bigint = "0.4.3"
 thiserror = "1.0.38"
-unicode-xid = "0.2.4"
 
 [dev-dependencies]
-expect-test = "1.4.0"

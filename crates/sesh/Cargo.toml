@@ -9,17 +9,6 @@ repository = "https://github.com/letsbuilda/selene"
 default-run = "sesh"
 
 [dependencies]
-atty = "0.2.14"
 clap = { version = "4.1.6", features = ["derive"] }
-dirs = "4.0.0"
-log = "0.4.17"
 miette = { version = "5.5.0", features = ["fancy"] }
 selene-lang = { path = "../selene-lang" }
-
-[target."cfg(unix)".dependencies]
-nix = { version = "0.26.2", default-features = false, features = ["term", "process", "signal"] }
-
-[[bin]]
-name = "sesh"
-path = "src/main.rs"
-bench = false

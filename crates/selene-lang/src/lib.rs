@@ -8,9 +8,9 @@
 )]
 
 pub mod error;
-mod lexer;
 mod span;
-mod symbol;
+mod ty;
+mod value;
 
 use error::ErrorSink;
 
@@ -23,12 +23,6 @@ use error::ErrorSink;
 ///
 /// If any errors are encountered, they will be returned as a `Result::Err`.
 /// Otherwise, execution can be assumed to have succeeded.
-pub fn execute(source: &str) -> Result<(), ErrorSink> {
-    let (_, errors) = lexer::lex(source);
-
-    if errors.has_errors() {
-        Err(errors)
-    } else {
-        Ok(())
-    }
+pub fn execute(_source: &str) -> Result<(), ErrorSink> {
+    Ok(())
 }
