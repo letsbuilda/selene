@@ -7,6 +7,7 @@ pub enum Type {
     Int,
     Float,
     Bool,
+    List(Box<Self>),
 }
 
 impl fmt::Display for Type {
@@ -17,6 +18,7 @@ impl fmt::Display for Type {
             Type::Int => write!(f, "Int"),
             Type::Float => write!(f, "Float"),
             Type::Bool => write!(f, "Bool"),
+            Type::List(_) => write!(f, "List"),
         }
     }
 }
