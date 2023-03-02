@@ -7,4 +7,5 @@ pub enum Value {
     Int(BigInt),
     Float(f64),
     Bool(bool),
+    List(Vec<Value>),
 }
