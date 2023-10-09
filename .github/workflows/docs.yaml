@@ -34,7 +34,7 @@ jobs:
         run: mv ./target/doc ./docs-build/api
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./docs-build
 
